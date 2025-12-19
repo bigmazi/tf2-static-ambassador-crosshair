@@ -168,6 +168,9 @@ void OnPluginToggled(ConVar cvar, const char[] oldval, const char[] newval)
 
 void OnDefaultModeChanged(ConVar cvar, const char[] oldval, const char[] newval)
 {
+	if (!sm_static_ambassador_crosshair_plugin_enabled.BoolValue)
+		return;
+	
 	for (int player = 1; player <= MaxClients; player++)
 	{
 		if (IsClientInGame(player))
@@ -226,7 +229,10 @@ Action cl_static_ambassador_crosshair(int player, int argsCount)
 				
 			}
 			
-			TrySetHeadshotAttributeForPrimaryAccordingToPreferences(player);
+			if (sm_static_ambassador_crosshair_plugin_enabled.BoolValue)
+			{
+				TrySetHeadshotAttributeForPrimaryAccordingToPreferences(player);
+			}
 		}
 	}
 	
