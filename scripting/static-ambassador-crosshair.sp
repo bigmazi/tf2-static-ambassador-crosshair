@@ -154,6 +154,9 @@ void OnPostInventoryApplication(Event event, const char[] name, bool dontBroadca
 
 void OnPluginToggled(ConVar cvar, const char[] oldval, const char[] newval)
 {
+	if (!!StringToInt(oldval) == !!StringToInt(newval))
+		return;
+	
 	bool enable = sm_static_ambassador_crosshair_plugin_enabled.BoolValue;
 	
 	if (enable)
